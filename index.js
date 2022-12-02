@@ -10,8 +10,7 @@ const server = http.createServer((req, res) => {
 		res.write(`<h1>Введите что-нибудь в адресную строку!</h1>`);
 		res.end();
 	} else {
-
-		res.write(`<h1>${urlParsed.pathname.slice(1)}</h1>`, "utf-8");
+		res.write(`<h1>${urlParsed.pathname.slice(1)}</h1>`);
 		res.end();
 	}
 })
