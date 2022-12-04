@@ -1,20 +1,24 @@
-const http = require('http');
-const url = require('url');
+const express = require('express');
+const path = require('path')
+const app = express();
 
-const port = 8080;
-const server = http.createServer((req, res) => {
-	const urlParsed = url.parse(req.url, true);
-	res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
+const PORT = 3000;
+const createPath = (page) => path.resolve(__dirname, 'views', `${page}.pug`);
 
-	if (urlParsed.pathname === '/') {
-		res.write(`<h1>Введите что-нибудь в адресную строку!</h1>`);
-		res.end();
-	} else {
-		res.write(`<h1>${urlParsed.pathname.slice(1)}</h1>`);
-		res.end();
-	}
+app.set('view engine', 'pug');
+app.set('view engine', 'pug');
+
+app.use(express.urlencoded({extended: false}));
+
+app.post('/', (req, res) => {
+	const {text} = req.body
+	res.render(createPath('index'), {text})
 })
 
-server.listen(port, () => {
-	console.log(`Server listening on: http://localhost:${port}`);
+app.get('/', (req, res) => {
+	res.render(createPath('index'))
 })
+
+app.listen(PORT, (err) => {
+	err ? console.log(err) : console.log(`listening port http://localhost:${PORT}`);
+});
