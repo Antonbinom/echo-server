@@ -6,7 +6,6 @@ const PORT = 3000;
 const createPath = (page) => path.resolve(__dirname, 'views', `${page}.pug`);
 
 app.set('view engine', 'pug');
-app.set('view engine', 'pug');
 
 app.use(express.urlencoded({extended: false}));
 
